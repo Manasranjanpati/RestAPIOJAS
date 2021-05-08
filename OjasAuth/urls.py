@@ -14,13 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path, include
 from AuthApp import views
+
+
+'''Writing urls in a router format so that we can write all urls in main
+urls.py with less amount of coding'''
+
+# from rest_framework.routers import DefaultRouter
+# router = DefaultRouter()
+# router.register("asset_ojas", views.AssetViewSet, 'asset')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('asset/', views.AssetViewSet.as_view({'get':'list','post':'create'})),
     path('asset_read/<int:pk>', views.AssetViewSet.as_view({'get':'retrieve','put':'update', 'patch':'partial_update', 'delete':'destroy'})),
+    # path('asset/', include(router.urls)),
 
 ]
